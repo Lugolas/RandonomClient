@@ -4,12 +4,12 @@ import moment from 'moment';
 
 const columns = [{
   title: 'Nom',
-  dataIndex: 'NameValue',
-  key: 'NameValue',
+  dataIndex: 'value',
+  key: 'value',
 }, {
   title: 'Categorie',
-  dataIndex: 'Category',
-  key: 'Category',
+  dataIndex: 'type',
+  key: 'type',
   render: cat => {
     let text;
     if (cat === "LastName") {
@@ -21,8 +21,8 @@ const columns = [{
   },
 }, {
   title: 'Préfixable',
-  dataIndex: 'IsPrefixable',
-  key: 'IsPrefixable',
+  dataIndex: 'prefixable',
+  key: 'prefixable',
   render: pref => (
     <span>
       <Tag color={pref === 0 ? 'geekblue' : 'green'} key={pref + '' + Math.floor((Math.random() * 1000) + 1)}>{pref === 0 ? 'NON' : 'OUI'}</Tag>
@@ -30,8 +30,8 @@ const columns = [{
   ),
 }, {
   title: 'Suffixable',
-  dataIndex: 'IsSuffixable',
-  key: 'IsSuffixable',
+  dataIndex: 'suffixable',
+  key: 'suffixable',
   render: suff => (
     <span>
       <Tag color={suff === 0 ? 'geekblue' : 'green'} key={suff + '' + Math.floor((Math.random() * 1000) + 1)}>{suff === 0 ? 'NON' : 'OUI'}</Tag>
@@ -39,8 +39,8 @@ const columns = [{
   ),
 }, {
   title: 'A été inventé le',
-  dataIndex: 'CreatedAt',
-  key: 'CreatedAt',
+  dataIndex: 'createdAt',
+  key: 'createdAt',
   render: date => 
     moment(date).fromNow()
 }];
@@ -57,7 +57,7 @@ class Home extends Component {
 
 
   onClickBefore = () => {
-    fetch('https://randonomserver.azurewebsites.net/api/names')
+    fetch('https://localhost:44339/api/names')
       .then(response => response.json())
       .then(data => {
         console.log(data);
