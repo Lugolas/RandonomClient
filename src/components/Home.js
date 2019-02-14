@@ -57,7 +57,7 @@ class Home extends Component {
 
 
   onClickBefore = () => {
-    fetch('https://localhost:44339/api/names')
+    fetch('https://randonomserver.azurewebsites.net/api/names')
       .then(response => response.json())
       .then(data => {
         console.log(data);
