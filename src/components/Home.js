@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Button, Row, Table, Tag, } from "antd";
 import moment from 'moment';
+import { capitalizeFirstLetter } from "./../utils/utils";
+require('moment/locale/fr');
 
 const columns = [{
   title: 'Nom',
@@ -10,9 +12,9 @@ const columns = [{
   title: 'Categorie',
   dataIndex: 'type',
   key: 'type',
-  render: cat => {
+  render: categorie => {
     let text;
-    if (cat === "LastName") {
+    if (categorie) {
       text = "Nom de famille"
     } else { 
       text = "Prénom"
@@ -23,26 +25,28 @@ const columns = [{
   title: 'Préfixable',
   dataIndex: 'prefixable',
   key: 'prefixable',
-  render: pref => (
+  render: prefixable => (
     <span>
-      <Tag color={pref === 0 ? 'geekblue' : 'green'} key={pref + '' + Math.floor((Math.random() * 1000) + 1)}>{pref === 0 ? 'NON' : 'OUI'}</Tag>
+      <Tag color={prefixable ? 'geekblue' : 'green'} key={prefixable + '' + Math.floor((Math.random() * 1000) + 1)}>{prefixable ? 'NON' : 'OUI'}</Tag>
     </span>
   ),
 }, {
   title: 'Suffixable',
   dataIndex: 'suffixable',
   key: 'suffixable',
-  render: suff => (
+  render: suffixable => (
     <span>
-      <Tag color={suff === 0 ? 'geekblue' : 'green'} key={suff + '' + Math.floor((Math.random() * 1000) + 1)}>{suff === 0 ? 'NON' : 'OUI'}</Tag>
+      <Tag color={suffixable ? 'geekblue' : 'green'} key={suffixable + '' + Math.floor((Math.random() * 1000) + 1)}>{suffixable ? 'NON' : 'OUI'}</Tag>
     </span>
   ),
 }, {
   title: 'A été inventé le',
   dataIndex: 'createdAt',
   key: 'createdAt',
-  render: date => 
-    moment(date).fromNow()
+  render: date => {
+    moment.locale(); 
+    return capitalizeFirstLetter(moment(date).fromNow())
+  }
 }];
 
 class Home extends Component {
@@ -52,9 +56,7 @@ class Home extends Component {
       gameHasBegun: false,
       randonoms: [],
     };
-
   }
-
 
   onClickBefore = () => {
     fetch('https://randonomserver.azurewebsites.net/api/names')

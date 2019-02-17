@@ -29,7 +29,7 @@ class App extends Component {
             {/* <Route path="/about" component={About} />
             <Route path="/topics" component={Topics} />  */}
           </Content>
-          <Footer>Inspiré de faits réels</Footer>
+          <Footer className="footer">Inspiré de faits réels</Footer>
         </div>
       </Router>
     );
