@@ -22,12 +22,12 @@ class App extends Component {
             <Menu
               theme="dark"
               mode="horizontal"
-              defaultSelectedKeys={["2"]}
+              defaultSelectedKeys={["1"]}
               style={{ lineHeight: "64px" }}
             >
               <Menu.Item key="1"><Link to="/"></Link>Accueil</Menu.Item>
-              <Menu.Item key="2">Créer noms</Menu.Item>
-              <Menu.Item key="3">Créer extensions</Menu.Item>
+              <Menu.Item disabled="true" key="2">Créer noms</Menu.Item>
+              <Menu.Item disabled="true" key="3">Créer extensions</Menu.Item>
             </Menu>
           </Header>
           <Content style={{ padding: "0 50px" }}>

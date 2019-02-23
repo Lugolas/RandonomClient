@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Row, Table, Tag } from "antd";
+import { Table, Tag } from "antd";
 import moment from "moment";
 import { capitalizeFirstLetter } from "./../utils/utils";
 import { fetchNames } from "./../utils/utils";
@@ -75,70 +75,26 @@ class Home extends Component {
     };
   }
 
-  onClickBefore = () => {
-    var result = fetchNames();
+  componentWillMount = () => {
+    var fetch = fetchNames();
 
-    this.setState({
-      gameHasBegun: true,
-      randonoms: result
-    })
-  };
-
-  componentDidMount = () => {
-    var result = fetchNames();
-
-    this.setState({
-      gameHasBegun: true,
-      randonoms: result
+    fetch.then(result => {
+      this.setState({
+        gameHasBegun: true,
+        randonoms: result
+      });
     });
   };
 
-  onClickAfter = () => {
-    this.setState({
-      gameHasBegun: false
-    });
-  };
-
-  renderBefore = () => {
+  render() {
+    console.log("render", this.props, this.state);
     return (
       <div>
-        <Row>Let the game begin</Row>
-
-        {/* <Row>
-          <Button type="primary" onClick={this.onClickBefore}>
-            Heyoo Let's gooo
-          </Button>
-        </Row> */}
-      </div>
-    );
-  };
-
-  renderAfter = () => {
-    return (
-      <div>
-        {/* <Row>Yes that was so good</Row> */}
-
-        {/* <Row>
-          <Button type="primary" onClick={this.onClickAfter}>
-            Calm Down Now
-          </Button>
-        </Row> */}
-
         <Table
           style={{ margin: 100 }}
           dataSource={this.state.randonoms}
           columns={columns}
         />
-      </div>
-    );
-  };
-
-  render() {
-    return (
-      <div>
-        {this.state.gameHasBegun === true
-          ? this.renderAfter()
-          : this.renderBefore()}
       </div>
     );
   }
