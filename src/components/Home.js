@@ -32,10 +32,10 @@ const columns = [
     render: prefixable => (
       <span>
         <Tag
-          color={prefixable ? "geekblue" : "green"}
+          color={prefixable === "true" ? "geekblue" : "green"}
           key={prefixable + "" + Math.floor(Math.random() * 1000 + 1)}
         >
-          {prefixable ? "NON" : "OUI"}
+          {prefixable === "true" ? "NON" : "OUI"}
         </Tag>
       </span>
     )
@@ -47,10 +47,10 @@ const columns = [
     render: suffixable => (
       <span>
         <Tag
-          color={suffixable ? "geekblue" : "green"}
+          color={suffixable === "true" ? "geekblue" : "green"}
           key={suffixable + "" + Math.floor(Math.random() * 1000 + 1)}
         >
-          {suffixable ? "NON" : "OUI"}
+          {suffixable === "true" ? "NON" : "OUI"}
         </Tag>
       </span>
     )
@@ -82,6 +82,7 @@ class Home extends Component {
     });
     var fetch = fetchNames();
     fetch.then(result => {
+      console.log(result);
       this.setState({
         gameHasBegun: true,
         loading: false,

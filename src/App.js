@@ -26,8 +26,8 @@ class App extends Component {
               style={{ lineHeight: "64px" }}
             >
               <Menu.Item key="1"><Link to="/"></Link>Accueil</Menu.Item>
-              <Menu.Item disabled="true" key="2">Créer noms</Menu.Item>
-              <Menu.Item disabled="true" key="3">Créer extensions</Menu.Item>
+              <Menu.Item disabled={true} key="2">Créer noms</Menu.Item>
+              <Menu.Item disabled={true} key="3">Créer extensions</Menu.Item>
             </Menu>
           </Header>
           <Content style={{ padding: "0 50px" }}>
