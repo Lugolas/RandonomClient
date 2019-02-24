@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Table, Tag } from "antd";
+import { Table, Tag, Spin } from "antd";
 import moment from "moment";
 import { capitalizeFirstLetter } from "./../utils/utils";
 import { fetchNames } from "./../utils/utils";
@@ -71,23 +71,34 @@ class Home extends Component {
     super(props);
     this.state = {
       gameHasBegun: false,
+      loading: false,
       randonoms: []
     };
   }
 
   componentWillMount = () => {
+    this.setState({
+      loading: true
+    });
     var fetch = fetchNames();
-
     fetch.then(result => {
       this.setState({
         gameHasBegun: true,
+        loading: false,
         randonoms: result
       });
     });
   };
 
-  render() {
-    console.log("render", this.props, this.state);
+  renderLoading = () => {
+    return (
+      <div className="table_loader">
+        <Spin />
+      </div>
+    );
+  };
+
+  renderLoaded = () => {
     return (
       <div>
         <Table
@@ -97,6 +108,11 @@ class Home extends Component {
         />
       </div>
     );
+  };
+
+  render() {
+    console.log("render", this.props, this.state);
+    return this.state.loading === true ? this.renderLoading() : this.renderLoaded();
   }
 }
 
