@@ -32,10 +32,10 @@ const columns = [
     render: prefixable => (
       <span>
         <Tag
-          color={prefixable === "true" ? "geekblue" : "green"}
+          color={prefixable === true ? "green" : "geekblue"}
           key={prefixable + "" + Math.floor(Math.random() * 1000 + 1)}
         >
-          {prefixable === "true" ? "NON" : "OUI"}
+          {prefixable === true ? "OUI" : "NON"}
         </Tag>
       </span>
     )
@@ -47,10 +47,10 @@ const columns = [
     render: suffixable => (
       <span>
         <Tag
-          color={suffixable === "true" ? "geekblue" : "green"}
+          color={suffixable === true ? "green" : "geekblue"}
           key={suffixable + "" + Math.floor(Math.random() * 1000 + 1)}
         >
-          {suffixable === "true" ? "NON" : "OUI"}
+          {suffixable === true ? "OUI" : "NON"}
         </Tag>
       </span>
     )
@@ -106,6 +106,7 @@ class Home extends Component {
           style={{ margin: 100 }}
           dataSource={this.state.randonoms}
           columns={columns}
+          rowKey="uid"
         />
       </div>
     );

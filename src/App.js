@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
-import { Button, Layout, Row, Menu, Breadcrumb } from "antd";
+import { Layout, Menu, } from "antd";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Home from "./components/Home";
+import NamesForm from "./components/NamesForm";
 import "./App.css";
 
-const { Header, Footer, Sider, Content } = Layout;
+const { Header, Footer, Content } = Layout;
 
 class App extends Component {
   constructor(props) {
@@ -26,7 +26,7 @@ class App extends Component {
               style={{ lineHeight: "64px" }}
             >
               <Menu.Item key="1"><Link to="/"></Link>Accueil</Menu.Item>
-              <Menu.Item disabled={true} key="2">Créer noms</Menu.Item>
+              <Menu.Item key="2"><Link to="/create-names"></Link>Créer noms</Menu.Item>
               <Menu.Item disabled={true} key="3">Créer extensions</Menu.Item>
             </Menu>
           </Header>
@@ -38,6 +38,7 @@ class App extends Component {
             </Breadcrumb> */}
             <div style={{ background: "#fff", padding: 24, minHeight: 280, marginTop: 16 }}>
               <Route exact path="/" component={Home} />
+              <Route exact path="/create-names" component={NamesForm} />
             </div>
           </Content>
           <Footer style={{ textAlign: "center" }}>
