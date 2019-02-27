@@ -1,64 +1,77 @@
 import React, { Component } from "react";
-import { Button, Form, Input, Checkbox, Icon, Select, } from "antd";
+import {
+  Button,
+  Form,
+  Input,
+  Checkbox,
+  Icon,
+  Select,
+  notification
+} from "antd";
 import { addName } from "./../utils/utils";
 
 class NamesForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      pouet: 'mdr t con',
-      value: '',
-      type: '0',
+      pouet: "mdr t con",
+      value: "",
+      type: "0",
       prefixable: false,
-      suffixable: false,
+      suffixable: false
     };
   }
 
-  handleSubmit = (e) => {
+  handleSubmit = e => {
     e.preventDefault();
-    
-    addName(JSON.stringify({
-      value: this.state.value,
-      type: this.state.type,
-      prefixable: this.state.prefixable,
-      suffixable: this.state.suffixable,
-    }))
-  }
 
-  handleNameChange = (e) => {
-    this.setState({value: e.target.value})
-  }
+    addName(
+      JSON.stringify({
+        value: this.state.value,
+        type: this.state.type,
+        prefixable: this.state.prefixable,
+        suffixable: this.state.suffixable
+      })
+    ).then(() => {
+      notification.open({
+        message: "Nom ajouté!",
+        description:
+          "Le nom à été ajouté à la liste. Vous êtes fier de ça? Ça promet..."
+      });
+    });
+  };
 
-  handleTypeChange = (e) => {
-    this.setState({type: e})
-  }
+  handleNameChange = e => {
+    this.setState({ value: e.target.value });
+  };
 
-  handlePrefChange = (e) => {
-    this.setState({prefixable: e.target.checked})
-  }
+  handleTypeChange = e => {
+    this.setState({ type: e });
+  };
 
-  handleSuffChange = (e) => {
-    this.setState({suffixable: e.target.checked})
-  }
+  handlePrefChange = e => {
+    this.setState({ prefixable: e.target.checked });
+  };
+
+  handleSuffChange = e => {
+    this.setState({ suffixable: e.target.checked });
+  };
 
   render() {
     return (
       <div>
         <Form onSubmit={this.handleSubmit} className="login-form">
           <Form.Item>
-            <Input 
+            <Input
               required
-              onChange={this.handleNameChange} 
-              prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} 
-              value={this.state.value} 
-              placeholder="Nom" 
+              onChange={this.handleNameChange}
+              prefix={<Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />}
+              value={this.state.value}
+              placeholder="Nom"
             />
           </Form.Item>
           <Form.Item>
-            <Select
-              value={this.state.type}
-              onChange={this.handleTypeChange}
-            >
+            <Select value={this.state.type} onChange={this.handleTypeChange}>
               <Select.Option value="0">Prénom</Select.Option>
               <Select.Option value="1">Nom de famille</Select.Option>
             </Select>
@@ -80,7 +93,11 @@ class NamesForm extends Component {
             </Checkbox>
           </Form.Item>
           <Form.Item>
-            <Button type="primary" htmlType="submit" className="login-form-button">
+            <Button
+              type="primary"
+              htmlType="submit"
+              className="login-form-button"
+            >
               Envoyer
             </Button>
           </Form.Item>
