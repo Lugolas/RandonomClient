@@ -3,6 +3,7 @@ import { Layout, Menu, } from "antd";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Home from "./components/Home";
 import NamesForm from "./components/NamesForm";
+import RandonAuth from "./components/RandonAuth";
 import "./App.css";
 
 const { Header, Footer, Content } = Layout;
@@ -10,8 +11,13 @@ const { Header, Footer, Content } = Layout;
 class App extends Component {
   constructor(props) {
     super(props);
+    this.RandonAuth = React.createRef();
     this.state = {};
   }
+
+  authClick = () =>{
+    this.RandonAuth.current.onClick();
+  };
 
   render() {
     return (
@@ -28,6 +34,8 @@ class App extends Component {
               <Menu.Item key="1"><Link to="/"></Link>Accueil</Menu.Item>
               <Menu.Item key="2"><Link to="/create-names"></Link>Créer noms</Menu.Item>
               <Menu.Item disabled={true} key="3">Créer extensions</Menu.Item>
+              <Menu.Item style={{float: "right"}} onClick={this.authClick}><RandonAuth ref={this.RandonAuth}></RandonAuth></Menu.Item>
+              
             </Menu>
           </Header>
           <Content style={{ padding: "0 50px" }}>
