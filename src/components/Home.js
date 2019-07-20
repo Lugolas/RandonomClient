@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Table, Tag, Spin } from "antd";
 import moment from "moment";
 import { capitalizeFirstLetter } from "./../utils/utils";
@@ -66,32 +66,20 @@ const columns = [
   }
 ];
 
-class Home extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      gameHasBegun: false,
-      loading: false,
-      randonoms: []
-    };
-  }
+const Home = () => {
+  const [loading, setLoading] = React.useState(false);
+  const [randonoms, setRandonoms] = React.useState([]);
 
-  componentWillMount = () => {
-    this.setState({
-      loading: true
-    });
+  React.useEffect(() => {
+    setLoading(true);
     var fetch = fetchNames();
     fetch.then(result => {
-      console.log(result);
-      this.setState({
-        gameHasBegun: true,
-        loading: false,
-        randonoms: result
-      });
+      setLoading(false);
+      setRandonoms(result);
     });
-  };
+  }, []);
 
-  renderLoading = () => {
+  const renderLoading = () => {
     return (
       <div className="table_loader">
         <Spin />
@@ -99,12 +87,12 @@ class Home extends Component {
     );
   };
 
-  renderLoaded = () => {
+  const renderLoaded = () => {
     return (
       <div>
         <Table
           style={{ margin: 100 }}
-          dataSource={this.state.randonoms}
+          dataSource={randonoms}
           columns={columns}
           rowKey="uid"
         />
@@ -112,10 +100,7 @@ class Home extends Component {
     );
   };
 
-  render() {
-    console.log("render", this.props, this.state);
-    return this.state.loading === true ? this.renderLoading() : this.renderLoaded();
-  }
-}
+  return loading === true ? renderLoading() : renderLoaded();
+};
 
 export default Home;

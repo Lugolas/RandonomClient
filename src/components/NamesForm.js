@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import {
   Button,
   Form,
@@ -10,27 +10,21 @@ import {
 } from "antd";
 import { addName } from "./../utils/utils";
 
-class NamesForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      pouet: "mdr t con",
-      value: "",
-      type: "0",
-      prefixable: false,
-      suffixable: false
-    };
-  }
+const NamesForm = () => {
+  const [value, setValue] = React.useState("");
+  const [type, setType] = React.useState("0");
+  const [prefixable, setPrefixable] = React.useState(false);
+  const [suffixable, setSuffixable] = React.useState(false);
 
-  handleSubmit = e => {
+  const handleSubmit = e => {
     e.preventDefault();
 
     addName(
       JSON.stringify({
-        value: this.state.value,
-        type: this.state.type,
-        prefixable: this.state.prefixable,
-        suffixable: this.state.suffixable
+        value: value,
+        type: type,
+        prefixable: prefixable,
+        suffixable: suffixable
       })
     ).then(() => {
       notification.open({
@@ -41,70 +35,62 @@ class NamesForm extends Component {
     });
   };
 
-  handleNameChange = e => {
-    this.setState({ value: e.target.value });
+  const handleNameChange = e => {
+    setValue(e.target.value);
   };
 
-  handleTypeChange = e => {
-    this.setState({ type: e });
+  const handleTypeChange = e => {
+    setType(e);
   };
 
-  handlePrefChange = e => {
-    this.setState({ prefixable: e.target.checked });
+  const handlePrefChange = e => {
+    setPrefixable(e.target.checked);
   };
 
-  handleSuffChange = e => {
-    this.setState({ suffixable: e.target.checked });
+  const handleSuffChange = e => {
+    setSuffixable(e.target.checked);
   };
 
-  render() {
-    return (
-      <div>
-        <Form onSubmit={this.handleSubmit} className="login-form">
-          <Form.Item>
-            <Input
-              required
-              onChange={this.handleNameChange}
-              prefix={<Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />}
-              value={this.state.value}
-              placeholder="Nom"
-            />
-          </Form.Item>
-          <Form.Item>
-            <Select value={this.state.type} onChange={this.handleTypeChange}>
-              <Select.Option value="0">Prénom</Select.Option>
-              <Select.Option value="1">Nom de famille</Select.Option>
-            </Select>
-          </Form.Item>
-          <Form.Item>
-            <Checkbox
-              checked={this.state.prefixable}
-              onChange={this.handlePrefChange}
-            >
-              Préfixable
-            </Checkbox>
-          </Form.Item>
-          <Form.Item>
-            <Checkbox
-              checked={this.state.suffixable}
-              onChange={this.handleSuffChange}
-            >
-              Suffixable
-            </Checkbox>
-          </Form.Item>
-          <Form.Item>
-            <Button
-              type="primary"
-              htmlType="submit"
-              className="login-form-button"
-            >
-              Envoyer
-            </Button>
-          </Form.Item>
-        </Form>
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <Form onSubmit={handleSubmit} className="login-form">
+        <Form.Item>
+          <Input
+            required
+            onChange={handleNameChange}
+            prefix={<Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />}
+            value={value}
+            placeholder="Nom"
+          />
+        </Form.Item>
+        <Form.Item>
+          <Select value={type} onChange={handleTypeChange}>
+            <Select.Option value="0">Prénom</Select.Option>
+            <Select.Option value="1">Nom de famille</Select.Option>
+          </Select>
+        </Form.Item>
+        <Form.Item>
+          <Checkbox checked={prefixable} onChange={handlePrefChange}>
+            Préfixable
+          </Checkbox>
+        </Form.Item>
+        <Form.Item>
+          <Checkbox checked={suffixable} onChange={handleSuffChange}>
+            Suffixable
+          </Checkbox>
+        </Form.Item>
+        <Form.Item>
+          <Button
+            type="primary"
+            htmlType="submit"
+            className="login-form-button"
+          >
+            Envoyer
+          </Button>
+        </Form.Item>
+      </Form>
+    </div>
+  );
+};
 
 export default Form.create()(NamesForm);
