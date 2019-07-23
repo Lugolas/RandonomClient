@@ -3,12 +3,12 @@ export function capitalizeFirstLetter(string) {
 }
 
 export function fetchNames(){
-    return fetch('https://randonomserver.azurewebsites.net/api/names')
+    return fetch(process.env.API_URL + '/names')
     .then(response => response.json());
 }
 
 export async function addName(formData){
-  return await fetch('https://randonomserver.azurewebsites.net/api/names',  {
+  return await fetch(process.env.API_URL + '/names',  {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
