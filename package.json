@@ -6,7 +6,7 @@
     "antd": "^3.13.2",
     "auth0-js": "^9.10.0",
     "babel-plugin-import": "^1.11.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "react": "^16.8.1",
     "react-dom": "^16.8.1",
     "react-router": "^4.3.1",
